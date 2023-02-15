@@ -1,0 +1,11 @@
+#calc-str {
+   margin: 5;
+   min-height: 25px;
+   background-color: white;
+   border:0px;
+}
+
+#calc-btn {
+    min-height: 25px;
+    margin-left: 10px;
+ }
