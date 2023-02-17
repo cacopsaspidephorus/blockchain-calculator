@@ -32,34 +32,37 @@ class History extends React.Component {
     }
 
     render() {
+        const content = (this.state.operations.length === 0) ?
+            <p id='no-data'>no data</p> :
+            <table>
+                <thead>
+                    <tr>
+                        <th className='table-header'>A</th>
+                        <th className='table-header'>Operator</th>
+                        <th className='table-header'>B</th>
+                        <th className='table-header'>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        this.state.operations.map(operation => {
+                            return (
+                                <tr key={Number(operation.timestamp)} style={operation.success ? { color: "green" } : { color: "red" }}>
+                                    <td>{Number(operation.a)}</td>
+                                    <td>{operatorUtils.numToOperator(operation.operator)}</td>
+                                    <td>{Number(operation.b)}</td>
+                                    <td>{Number(operation.result)}</td>
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+            </table>
+
         return (
             <div>
                 <p>Operations History</p>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th className='table-header'>A</th>
-                            <th className='table-header'>Operator</th>
-                            <th className='table-header'>B</th>
-                            <th className='table-header'>Result</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.state.operations.map(operation => {
-                                return (
-                                    <tr key={Number(operation.timestamp)} style={operation.success ? { color: "green" } : { color: "red" }}>
-                                        <td>{Number(operation.a)}</td>
-                                        <td>{operatorUtils.numToOperator(operation.operator)}</td>
-                                        <td>{Number(operation.b)}</td>
-                                        <td>{Number(operation.result)}</td>
-                                    </tr>
-                                )
-                            })
-                        }
-                    </tbody>
-                </table>
+                {content}
             </div>
         )
     }
